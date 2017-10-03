@@ -1,24 +1,25 @@
 language: node_js
-node_js:
-  - '8'
 
-branches:
+node_js:
+   - node # will use latest node
+
+branches: # branches to watch for changes
   only:
     - master
 
-cache:
+cache: # things to cache
   node: true
   directories:
     - node_modules
 
-before_script:
-  - npm install -g @angular/cli
-  - npm install
+before_script: # commands to run before the build step
+   - npm install -g --silent @angular/cli
+   - npm install --silent
 
-script:
+script: # the deploy step
   - npm run deploy
 
 notifications:
-  email:
+  email: # only receive email when the build status changes (someone broke the build!)
     on_failure: change
     on_success: change
