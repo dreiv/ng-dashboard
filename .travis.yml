@@ -1,9 +1,24 @@
 language: node_js
+node_js:
+  - '8'
+
 branches:
   only:
     - master
+
+cache:
+  node: true
+  directories:
+    - node_modules
+
 before_script:
   - npm install -g @angular/cli
   - npm install
+
 script:
   - npm run deploy
+
+notifications:
+  email:
+    on_failure: change
+    on_success: change
