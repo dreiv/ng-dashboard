@@ -9,11 +9,7 @@ branches: # branches to watch for changes
 
 cache: # things to cache
   directories:
-    - node
     - node_modules
-
-before_script: # commands to run before the build step
-   - npm install -g --silent @angular/cli
 
 script: # the build step
   - npm run build.prod

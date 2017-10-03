@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build.prod": "ng build --aot --prod --progress false --base-href \"https://<user-name>.github.io/<repository-name>/\""
+    "build.prod": "ng build --aot --prod --progress false --base-href \"https://dreiv.github.io/ng-dashboard/\""
   },
   "private": true,
   "dependencies": {
