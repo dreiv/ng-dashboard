@@ -3,6 +3,10 @@ language: node_js
 node_js:
    - node # will use latest node
 
+before_install:
+    - npm install -g npm
+    - npm install -g greenkeeper-lockfile
+
 branches: # branches to watch for changes
   only:
     - master
@@ -12,8 +16,12 @@ cache: # things to cache
   directories:
     - node_modules
 
+before_script: greenkeeper-lockfile-update
+
 script: # the build step
   - npm run build.prod
+
+after_script: greenkeeper-lockfile-upload
 
 deploy: # deploying the application
   provider: pages
