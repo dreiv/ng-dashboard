@@ -2,5 +2,5 @@ install: true
 branches:
   only:
     - master
-deploy:
+script:
   - npm run deploy
