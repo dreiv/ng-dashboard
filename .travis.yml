@@ -6,6 +6,7 @@ node_js:
 branches: # branches to watch for changes
   only:
     - master
+    - /^greenkeeper/.*$/
 
 cache: # things to cache
   directories:
