@@ -1,6 +1,35 @@
 <h1>{{title}}</h1>
 
-<div class="movable" [@movable]="moving">
-    I like to move it, move it.
+<hr>
+<h2>Welcome, here are the latest updates on your stock picks.</h2>
+<br>
+
+<div class="row-fluid">
+    <div class="widget-box">
+        <div class="widget-content nopadding">
+            <table class="table data-table">
+                <thead>
+                <tr>
+                    <th>Stock Symbol</th>
+                    <th>Price</th>
+                    <th>Bought At</th>
+                    <th>Quantity</th>
+                    <th>Total Value</th>
+                    <th>Current Trend</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- loop through all stock price data, and list them in a row, binding the trending trigger to the value of the stock's trend property -->
+                <tr class="gradeX" *ngFor="let stock of stockPrices" [@trending]="stock.trend">
+                    <td>{{stock.symbol}}</td>
+                    <td>USD {{stock.price}}</td>
+                    <td>{{stock.bought_price}}</td>
+                    <td class="center">{{stock.quantity}}</td>
+                    <td>{{stock.price * stock.quantity}}</td>
+                    <td>{{stock.trend}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-<button type="button" class="btn btn-success" (click)="moveIt()">Move It!</button>

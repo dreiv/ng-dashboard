@@ -9,14 +9,25 @@ import { StockService } from './stock.service';
 	providers: [ StockService ],
 	// animations metadata, we define a trigger with two possible states
 	animations: [
-		trigger('movable', [
-			state('fixed', style({})),
-			state('roaming', style({
-				'background-color': 'green',
-				'left': '90%'
+		trigger('trending', [
+			// define a down state, with a background style of red to distinguish it from an up state
+			state('DOWN', style({
+				'background-color': '#e74c3c'
 			})),
-			// define a transition from one state to another, and an associated animation
-			transition('* => *', animate('5s 0s ease-in'))
+			// define an up state, with a less jarring green color
+			state('UP', style({
+				'background-color': '#00bc8c'
+			})),
+			// when a stock changes from up to down, animate the change over 3 seconds
+			transition('UP => DOWN', [
+				style({transform: 'translateX(-100%)'}),
+				animate(3000)
+			]),
+			// when a stock changes from down to up, animate vertically, over 200ms
+			transition('DOWN => UP', [
+				style({transform: 'translateY(-100%)'}),
+				animate(200)
+			])
 		])
 	]
 })
@@ -33,12 +44,6 @@ export class AppComponent implements OnInit {
 	ngOnInit(): void {
 		// check for updated prices
 		setInterval(() => {this.getStockPrices(); }, 1000);
-	}
-
-	moveIt() {
-		console.log('on the move');
-		// change the state of moving to roaming, activating the trigger and animation
-		this.moving = 'roaming';
 	}
 
 	getStockPrices() {
