@@ -5,7 +5,6 @@ import { Stock, StockService } from './stock.service';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss'],
 	providers: [ StockService ],
 	// animations metadata, we define a trigger with two possible states
 	animations: [
