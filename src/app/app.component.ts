@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { StockService } from './stock.service';
+import { Stock, StockService } from './stock.service';
 
 @Component({
 	selector: 'app-root',
@@ -32,25 +32,20 @@ import { StockService } from './stock.service';
 	]
 })
 export class AppComponent implements OnInit {
-	title = 'Stock Dashboard';
-	moving: string;
-	stockPrices = [];
+	stocks: Stock[];
 
-	constructor(private stockService: StockService) {
+	constructor(private stockService: StockService) {}
 
-	}
-
-	// once the component is created, poll the stock service regularly for fresh prices
 	ngOnInit(): void {
-		// check for updated prices
-		setInterval(() => {this.getStockPrices(); }, 1000);
+		// once the component is created, poll the stock service regularly for fresh prices
+		setInterval(() => {
+			// call out asynchronously to the stock service for stocks, then update the stocks once data is received back
+			this.stockService.getStocks().then(stocks => {
+				console.log('just got stocks: ', stocks);
+				this.stocks = stocks;
+			});
+		}, 1000);
 	}
 
-	getStockPrices() {
-		// call out asynchronously to the stock service for prices, then update prices once data is received back
-		this.stockService.getStockPrices().then(prices => {
-			console.log('just got prices: ', prices);
-			this.stockPrices = prices;
-		});
-	}
+	trackBySymbol(index: number, stock: Stock): string { return stock.symbol; }
 }
