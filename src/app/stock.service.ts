@@ -94,7 +94,7 @@ export class StockService {
 			},
 			{
 				symbol: StockSymbol.Apple,
-				price: 200,
+				price: 120,
 				compute: this.uptrend,
 				bought_price: 85,
 				quantity: 20,
